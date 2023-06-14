@@ -1,6 +1,5 @@
 const { addPath, getInput, setFailed } = require("@actions/core")
 const { downloadTool: dltmp, extractZip } = require("@actions/tool-cache")
-const latestRelease = require("github-latest-release")
 const { coerce: coerceSemVer } = require("semver")
 const { arch, platform } = require("os")
 const { join } = require("path")
@@ -58,7 +57,7 @@ async function main() {
     let version = coerceSemVer(getInput("version"))
 
     if (!version) {
-      const release = await latestRelease("WebAssembly", "wabt")
+      const release = "1.0.33" // await latestRelease("WebAssembly", "wabt")
       version = release.tag_name.replace(/^v/, "")
     }
 
