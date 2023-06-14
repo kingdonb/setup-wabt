@@ -30,12 +30,12 @@ function rm(file) {
 
 function dlurl(version) {
   if (IS_WINDOWS) {
-    const os = `win${ARCH.replace(/^x/, "")}`
+    const os = "windows"
     return `${BASE_URL}${version}/wabt-${version}-${os}.zip`
   } else if (PLATFORM === "darwin") {
-    return `${BASE_URL}${version}/wabt-${version}-osx.tar.gz`
+    return `${BASE_URL}${version}/wabt-${version}-macos-12.tar.gz`
   } else {
-    return `${BASE_URL}${version}/wabt-${version}-linux.tar.gz`
+    return `${BASE_URL}${version}/wabt-${version}-ubuntu.tar.gz`
   }
 }
 
@@ -61,8 +61,11 @@ async function main() {
       const release = "v1.0.33" // await latestRelease("WebAssembly", "wabt")
       version = release.replace(/^v/, "")
     }
+    // console.log(version)
 
     const dir = wabtdir(version)
+
+    // console.log(dir)
 
     archive = await dltmp(dlurl(version))
 
