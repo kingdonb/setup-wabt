@@ -54,13 +54,13 @@ async function main() {
   let archive
 
   try {
-    let version = "1.0.33"
-    // let version = coerceSemVer(getInput("version"))
+    // const version = "1.0.33"
+    let version = coerceSemVer(getInput("version"))
 
-    // if (!version) {
-    //   const release = "1.0.33" // await latestRelease("WebAssembly", "wabt")
-    //   version = release.tag_name.replace(/^v/, "")
-    // }
+    if (!version) {
+      const release = "v1.0.33" // await latestRelease("WebAssembly", "wabt")
+      version = release.replace(/^v/, "")
+    }
 
     const dir = wabtdir(version)
 
