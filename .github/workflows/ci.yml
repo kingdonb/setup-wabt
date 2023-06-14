@@ -23,6 +23,11 @@ jobs:
       - name: install deps
         run: npm i
       - name: install wabt
-        run: node ./main.js
+        # with:
+        #   version: 1.0.33
+        run: |
+          node ./main.js
+          echo "$HOME/.wabt_1.0.33/bin" >> $GITHUB_PATH
+
       - name: check a tool
         run: wat2wasm --help
