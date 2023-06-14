@@ -1,6 +1,5 @@
 const { addPath, getInput, setFailed } = require("@actions/core")
 const { downloadTool: dltmp, extractZip } = require("@actions/tool-cache")
-const latestRelease = require("github-latest-release")
 const { coerce: coerceSemVer } = require("semver")
 const { arch, platform } = require("os")
 const { join } = require("path")
@@ -31,12 +30,12 @@ function rm(file) {
 
 function dlurl(version) {
   if (IS_WINDOWS) {
-    const os = `win${ARCH.replace(/^x/, "")}`
+    const os = "windows"
     return `${BASE_URL}${version}/wabt-${version}-${os}.zip`
   } else if (PLATFORM === "darwin") {
-    return `${BASE_URL}${version}/wabt-${version}-osx.tar.gz`
+    return `${BASE_URL}${version}/wabt-${version}-macos-12.tar.gz`
   } else {
-    return `${BASE_URL}${version}/wabt-${version}-linux.tar.gz`
+    return `${BASE_URL}${version}/wabt-${version}-ubuntu.tar.gz`
   }
 }
 
@@ -55,14 +54,18 @@ async function main() {
   let archive
 
   try {
+    // const version = "1.0.33"
     let version = coerceSemVer(getInput("version"))
 
     if (!version) {
-      const release = await latestRelease("WebAssembly", "wabt")
-      version = release.tag_name.replace(/^v/, "")
+      const release = "v1.0.33" // await latestRelease("WebAssembly", "wabt")
+      version = release.replace(/^v/, "")
     }
+    // console.log(version)
 
     const dir = wabtdir(version)
+
+    // console.log(dir)
 
     archive = await dltmp(dlurl(version))
 
