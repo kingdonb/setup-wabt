@@ -8,7 +8,7 @@ inputs:
     description: binaryen version, defaults to 113
     required: false
 runs:
-  using: node16
+  using: node20
   main: main.js
 author: Noah Anabiik Schwarz
 branding:
