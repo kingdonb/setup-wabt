@@ -81,16 +81,16 @@ async function main() {
   let archive
 
   try {
-    // const version = "1.0.33"
+    // const version = "1.0.34"
     let version = coerceSemVer(getInput("version"))
     let version2 = getInput("version2")
 
     if (!version) {
-      const release = "v1.0.33" // await latestRelease("WebAssembly", "wabt")
+      const release = "v1.0.34" // await latestRelease("WebAssembly", "wabt")
       version = release.replace(/^v/, "")
     }
     if (!version2) {
-      version2 = "113"
+      version2 = "117"
     }
 
     const dir = wabtdir(version)
